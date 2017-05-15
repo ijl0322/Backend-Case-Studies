@@ -51,33 +51,33 @@ extension ViewController: FBSDKLoginButtonDelegate {
                 let cursors = paging?["cursors"] as? [String:Any]
                 let nextCursor = cursors?["after"] as? String
                 
-                if let _ = nextCursor
+                if let nextCursor = nextCursor
                 {
-                    let paramsOfNextPage:Dictionary = FBSDKUtility.dictionary(withQueryString: nextCursor!)
-                    
                     print("Going on to the next page")
-                    dump(paramsOfNextPage)
-                    
-                    let new = "/me/taggable_friends?limit=25&after=" + nextCursor!
-                    
-                    FBSDKGraphRequest(graphPath: new, parameters: [:]).start { (connection, result, err) in
-                        
-                        //dump(result)
-                        if err != nil {
-                            print("Failed to start graph request:", err ?? "Unknown Error")
-                            return
-                        }
-                        //print(result ?? "No results")
-                        let data = result as! [String: Any]
-                        let friends = data["data"] as! [Any]
-                        for friend in friends{
-                            let friendInfo = friend as! [String:Any]
-                            print(friendInfo["name"]!)
-                        }
-                    }
-
+                    self.nextPage(cursor: nextCursor)
                 }
             }
         }
     }
+    
+    func nextPage(cursor: String) {
+        let new = "/me/taggable_friends?limit=25&after=" + cursor
+        
+        FBSDKGraphRequest(graphPath: new, parameters: [:]).start { (connection, result, err) in
+            
+            if err != nil {
+                print("Failed to start graph request:", err ?? "Unknown Error")
+                return
+            }
+            //print(result ?? "No results")
+            let data = result as! [String: Any]
+            let friends = data["data"] as! [Any]
+            for friend in friends{
+                let friendInfo = friend as! [String:Any]
+                print(friendInfo["name"]!)
+            }
+        }
+    }
 }
+
+
