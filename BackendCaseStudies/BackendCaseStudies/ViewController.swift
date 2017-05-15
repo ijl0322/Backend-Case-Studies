@@ -7,7 +7,9 @@
 //
 
 import UIKit
+
 import FBSDKLoginKit
+import FirebaseAuth
 
 class ViewController: UIViewController {
 
@@ -18,13 +20,17 @@ class ViewController: UIViewController {
         fbLoginButton.delegate = self
         fbLoginButton.readPermissions = ["email", "user_friends", "read_custom_friendlists"]
     }
-
 }
 
 extension ViewController: FBSDKLoginButtonDelegate {
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("Logged out")
+        do {
+            try FIRAuth.auth()?.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
@@ -32,6 +38,17 @@ extension ViewController: FBSDKLoginButtonDelegate {
             print("Some error occured: \(error)")
         } else {
             print("Logged in")
+            
+            let token = FBSDKAccessToken.current().tokenString
+            let loginCredential = FIRFacebookAuthProvider.credential(withAccessToken: token!)
+            FIRAuth.auth()?.signIn(with: loginCredential, completion: {(user, error) in
+                if error != nil {
+                    print("Some error occured: \(error ?? "unknown error" as! Error)")
+                    return
+                }
+                print("Logged in using FB SDK's token")
+            })
+            
             FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email, taggable_friends"]).start { (connection, result, err) in
                 
                 if err != nil {
@@ -60,11 +77,14 @@ extension ViewController: FBSDKLoginButtonDelegate {
         }
     }
     
+    func getFriends() {
+        
+    }
+    
     func nextPage(cursor: String) {
         let new = "/me/taggable_friends?limit=25&after=" + cursor
         
         FBSDKGraphRequest(graphPath: new, parameters: [:]).start { (connection, result, err) in
-            
             if err != nil {
                 print("Failed to start graph request:", err ?? "Unknown Error")
                 return

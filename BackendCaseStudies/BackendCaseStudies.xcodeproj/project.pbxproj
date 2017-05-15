@@ -13,6 +13,7 @@
 		0E47B36D1EC8B76500DAFFD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E47B36B1EC8B76500DAFFD6 /* Main.storyboard */; };
 		0E47B36F1EC8B76500DAFFD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E47B36E1EC8B76500DAFFD6 /* Assets.xcassets */; };
 		0E47B3721EC8B76500DAFFD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E47B3701EC8B76500DAFFD6 /* LaunchScreen.storyboard */; };
+		0E47B37B1EC9347900DAFFD6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E47B37A1EC9347900DAFFD6 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		0E47B3711EC8B76500DAFFD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0E47B3731EC8B76500DAFFD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0E47B3791EC8EBF700DAFFD6 /* BackendCaseStudies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BackendCaseStudies.entitlements; sourceTree = "<group>"; };
+		0E47B37A1EC9347900DAFFD6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B7D9BCCB20DC45C2B87FC3E6 /* Pods-BackendCaseStudies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackendCaseStudies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BackendCaseStudies/Pods-BackendCaseStudies.debug.xcconfig"; sourceTree = "<group>"; };
 		C03B31D7ED6DA0C547D05D77 /* Pods_BackendCaseStudies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BackendCaseStudies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE90EFC53A6D54FFDC8992BE /* Pods-BackendCaseStudies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackendCaseStudies.release.xcconfig"; path = "Pods/Target Support Files/Pods-BackendCaseStudies/Pods-BackendCaseStudies.release.xcconfig"; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 		0E47B3661EC8B76500DAFFD6 /* BackendCaseStudies */ = {
 			isa = PBXGroup;
 			children = (
+				0E47B37A1EC9347900DAFFD6 /* GoogleService-Info.plist */,
 				0E47B3791EC8EBF700DAFFD6 /* BackendCaseStudies.entitlements */,
 				0E47B3671EC8B76500DAFFD6 /* AppDelegate.swift */,
 				0E47B3691EC8B76500DAFFD6 /* ViewController.swift */,
@@ -159,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E47B3721EC8B76500DAFFD6 /* LaunchScreen.storyboard in Resources */,
+				0E47B37B1EC9347900DAFFD6 /* GoogleService-Info.plist in Resources */,
 				0E47B36F1EC8B76500DAFFD6 /* Assets.xcassets in Resources */,
 				0E47B36D1EC8B76500DAFFD6 /* Main.storyboard in Resources */,
 			);

@@ -8,6 +8,8 @@ target 'BackendCaseStudies' do
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
+  pod 'Firebase/Core'
+  pod 'FirebaseAuth'
   # Pods for BackendCaseStudies
 
 end
