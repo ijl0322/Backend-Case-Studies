@@ -58,7 +58,7 @@ extension ViewController: FBSDKLoginButtonDelegate {
                     print("Going on to the next page")
                     dump(paramsOfNextPage)
                     
-                    let new = "1650320694980161/taggable_friends?access_token=EAAIqtKtDHV4BAJpo5BXCu8ZCrpo2a3PfrAhAzXcj08ofmYzCcnNqO44OijLjNCaQwzwFZA9j8BcZB17oh91DUkO3F2fFcHHkVKHVtnRTBCT5uMgC3sX0vcueOQQoEPOYzcdTdWNWO9PL0ZBoyhC55PdfihUAW0yI6xWwbMllWKrghwu3hNUnrl8mds1HrAKZC1MrlEwTuZCBNwdDZBAG2JQYbDr3XBBeTwZD&limit=25&after=QWFMZAjRTWVBwNkN4QzlaTEF6VWJXczNfN0pZAMEp5em5UVzFXakRoOFV3SUVOQUQ2Mm1qa19INUFqeTVwWHdzdWFZAdjFla0huYTBMLTRNOGF3NjJKMHFUZAVJSSGNFaTdOQUhPdGRSWWF6VGlaSHcZD"
+                    let new = "/me/taggable_friends?limit=25&after=" + nextCursor!
                     
                     FBSDKGraphRequest(graphPath: new, parameters: [:]).start { (connection, result, err) in
                         
