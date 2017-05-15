@@ -49,47 +49,47 @@ extension ViewController: FBSDKLoginButtonDelegate {
                 print("Logged in using FB SDK's token")
             })
             
-            FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email, taggable_friends"]).start { (connection, result, err) in
-                
-                if err != nil {
-                    print("Failed to start graph request:", err ?? "Unknown Error")
-                    return
-                }
-                //print(result ?? "No results")
-                let parsedResults = result as! [String: Any]
-                let data = parsedResults["taggable_friends"] as! [String:Any]
-                let friends = data["data"] as! [Any]
-                for friend in friends{
-                    let friendInfo = friend as! [String:Any]
-                    print(friendInfo["name"]!)
-                }
-                
-                let paging = data["paging"]! as? [String:Any]
-                let cursors = paging?["cursors"] as? [String:Any]
-                let nextCursor = cursors?["after"] as? String
-                
-                if let nextCursor = nextCursor
-                {
-                    print("Going on to the next page")
-                    self.nextPage(cursor: nextCursor)
-                }
-            }
+            getFriends()
         }
     }
     
     func getFriends() {
-        
+        FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email, taggable_friends"]).start { (connection, result, err) in
+            
+            if err != nil {
+                print("Failed to start graph request:", err ?? "Unknown Error")
+                return
+            }
+
+            let parsedResults = result as! [String: Any]
+            let data = parsedResults["taggable_friends"] as! [String:Any]
+            let friends = data["data"] as! [Any]
+            for friend in friends{
+                let friendInfo = friend as! [String:Any]
+                print(friendInfo["name"]!)
+            }
+            
+            let paging = data["paging"]! as? [String:Any]
+            let cursors = paging?["cursors"] as? [String:Any]
+            let nextCursor = cursors?["after"] as? String
+            
+            if let nextCursor = nextCursor
+            {
+                print("Going on to the next page")
+                self.nextPage(cursor: nextCursor)
+            }
+        }
     }
     
     func nextPage(cursor: String) {
-        let new = "/me/taggable_friends?limit=25&after=" + cursor
+        let  new = "/me/taggable_friends?limit=25&after=" + cursor
         
         FBSDKGraphRequest(graphPath: new, parameters: [:]).start { (connection, result, err) in
             if err != nil {
                 print("Failed to start graph request:", err ?? "Unknown Error")
                 return
             }
-            //print(result ?? "No results")
+
             let data = result as! [String: Any]
             let friends = data["data"] as! [Any]
             for friend in friends{
